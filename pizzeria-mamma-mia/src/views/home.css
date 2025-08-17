@@ -1,0 +1,6 @@
+.home { width: 100%; }
+.header-wrap {
+  width: 100%;
+  min-height: 30vh;   
+  display: grid;
+}

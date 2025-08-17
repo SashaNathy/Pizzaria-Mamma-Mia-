@@ -1,0 +1,10 @@
+
+.app { 
+  max-width: 1200px;
+  margin: 0 auto; 
+}
+
+.home-wrap { 
+  width: 100%; 
+  min-height: 87vh; 
+} 

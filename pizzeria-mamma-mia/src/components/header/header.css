@@ -1,0 +1,12 @@
+.header {
+    background-image: url(../../../public/Header.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: aliceblue;
+
+}
