@@ -7,7 +7,6 @@ import { Header } from "../components/header/Header";
 import "./home.css";
 
 const Home = () => {
-  // const [first, setfirst] = useState(second)
   return (
     <main className="home">
       <section className="header-wrap">
