@@ -1,46 +1,50 @@
-# 🍕 Pizzería Mamma Mía — Hito 1
+# 🍕 Pizzería Mamma Mía — Hito 2
 
-Proyecto listo y servido. Abajo detallo **lo que YA está hecho** (sin vueltas).
+Objetivo
 
-## ✅ Qué incluye este hito
+Implementar un mini flujo Register → Login → Home sin persistencia y sin useContext, con render dinámica controlada desde App.jsx.
 
-- **Estructura principal montada**
-  - `App.jsx` renderiza **Navb**, **Home** y **Footer**.
-  - Se usa **Vite + React** (con **React-Bootstrap/Bootstrap** para estilos responsivos).
 
-- **Navbar funcional (condicional por login)**
-  - Ítems siempre visibles: **🍕 Home** y **🛒 Total: $**.
-  - Render condicional con `useState` (`token`):  
-    - `token === false` → **🔓 Login** y **📄 Register**.  
-    - `token === true` → **📄 Profile** y **🔐 Logout**.
-  - Click en **Login/Logout** alterna `token` (sin `useEffect`, tal como se pidió).
-  - **Total** se muestra con separador de miles usando `toLocaleString('es-CL')` → `25.000`.
+1) Register (componente RegisterForm)
 
-- **Home + Header**
-  - `Home` incluye el componente **Header** con **título** y **descripción** de la pizzería.
-  - Estilos aplicados (centrado y, opcionalmente, fondo/altura si se necesita).
+Campos: Email, Contraseña, Confirmar contraseña.
 
-- **Tarjetas de pizzas (3 en total)**
-  - Componente **`CardPizza`** recibe props: `name`, `price`, `ingredients[]`, `img`.
-  - **Ingredientes** mostrados **separados por coma y espacio** (`join(', ')`).
-  - `price` mostrado con `toLocaleString('es-CL')`.
-  - Botones **“Ver más”** y **“Añadir”** (sin lógica, tal como pide el hito).
+Validaciones mínimas:
 
-- **Footer**
-  - Texto exacto: `© 2021 - Pizzería Mamma Mía! - Todos los derechos reservados`.
-  - Estilizado con **bg-dark** + **text-white**, centrado.
+Todos los campos obligatorios (no vacíos).
 
-## 🛠️ Detalles técnicos aplicados
+Password ≥ 6 caracteres.
 
-- **Formateo de miles**: `total.toLocaleString('es-CL', { minimumFractionDigits: 0 })`.  
-  (Opcional: se dejó listo un util `formatCL(n)` para reutilizar si se desea).
-- **Condicionales**: ternarios y/o cortocircuito según `token`.
-- **Centrado y layout**: utilidades de Bootstrap (`d-flex`, `align-items-center`, `text-center`, `gap`, etc.).
-- **Imágenes**: `alt` aplicado y URLs en una sola línea.
+Password y Confirmación iguales.
 
-## ▶️ Cómo correr
+Al enviar:
 
-```bash
-npm i
-npm run dev
+Si todo OK → mensaje de éxito y avanzar a Login.
 
+Si hay errores → mensaje de error y no avanza.
+
+2) Login (componente LoginForm)
+
+Campos: Email, Contraseña.
+
+Validaciones mínimas:
+
+Todos los campos obligatorios.
+
+Password ≥ 6 caracteres.
+
+Al enviar:
+
+Si todo OK → mensaje de éxito y avanzar a Home.
+
+Si hay errores → mensaje de error.
+
+3) Render dinámica (en App.jsx)
+
+screen: controla la vista actual (por defecto register).
+
+loggedIn: true/false según resultado de Login.
+
+Flujo: register (OK) → login (OK) → home.
+
+Navb solo refleja loggedIn (no cambia estados por click).
