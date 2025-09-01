@@ -44,7 +44,7 @@ function Navb({ loggedIn }) {
           </Nav>
 
           <Nav>
-            <Nav.Link href="#" onClick={(e) => e.preventDefault()}>
+            <Nav.Link href="." onClick={(e) => e.preventDefault()}>
               🛒Total: $ <strong>{formatCL(total)}</strong>
             </Nav.Link>
           </Nav>
