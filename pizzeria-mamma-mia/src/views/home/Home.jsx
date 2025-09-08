@@ -1,14 +1,34 @@
-// import React, { useState } from 'react'
+import React, { useState } from "react";
+import { useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import CardPizza from "../../components/cardpizza/CardPizza.jsx";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Header } from "../../components/header/Header.jsx";
-import { pizzas } from "../../utils/pizzas.js";
 import "./home.css";
 
-const Home = () => {
-  // console.log(pizzas);
+const Home = ({ url }) => {
+  const [pizzas, setPizzas] = useState([]);
+
+  const getPizzas = async () => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setPizzas(data);
+    } catch (error) {
+      console.error({
+        message: `Error al consultar la API`,
+        status: 500,
+        code: `INTERNAL SERVER ERROR`,
+        error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    getPizzas();
+  }, []);
+
   return (
     <main className="home">
       <section className="header-wrap">

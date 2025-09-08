@@ -7,12 +7,14 @@ import RegisterForm from "./components/registerForm/RegisterForm.jsx";
 import LoginForm from "./components/loginForm/LoginForm.jsx";
 import { pizzaCart } from "./utils/pizzas.js";
 import { Cart } from "./views/cart/Cart.jsx";
+import PizzaDetail from "./views/pizzaDetail/PizzaDetail.jsx";
 
 export default function App() {
   // const [screen, setScreen] = useState("register"); // register → login → home
   // const [loggedIn, setLoggedIn] = useState(false);
   // const [email, setEmail] = useState("");
   const [items, setItems] = useState(pizzaCart);
+  const url = "http://localhost:5000/api/pizzas";
 
   const handleInc = (id) => {
     setItems((prev) =>
@@ -43,7 +45,6 @@ export default function App() {
             }}
           />
         )} */}
-
         {/* {screen === "login" && (
           <LoginForm
             // className="center"
@@ -54,10 +55,10 @@ export default function App() {
             // // }}
           />
         )} */}
-
         {/* {screen === "home" && <Home />} */}
-        <Home />
-        <Cart items={items} onInc={handleInc} onDec={handleDec} />
+        {/* <Home url={url} /> */}
+        {/* <Cart items={items} onInc={handleInc} onDec={handleDec} /> */}
+        <PizzaDetail url={url} id="p001" />
       </div>
 
       <Footer />
