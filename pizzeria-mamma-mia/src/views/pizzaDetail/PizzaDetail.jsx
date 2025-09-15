@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, ListGroup, Badge, Container } from "react-bootstrap";
 import { formatCL } from "../../utils/formatCL.js";
+import { Loading } from "../../components/index.js";
 
 const PizzaDetail = ({ url, id }) => {
   const [pizza, setPizza] = useState(null);
@@ -23,7 +24,7 @@ const PizzaDetail = ({ url, id }) => {
     pizzaId(id);
   }, [id, url]);
 
-  if (loading) return <p>Cargando…</p>;
+  if (loading) return <Loading />;
   if (err) return <p>Error: {err}</p>;
   if (!pizza) return <p>No se encontró la pizza.</p>;
 

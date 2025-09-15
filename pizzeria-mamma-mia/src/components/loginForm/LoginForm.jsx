@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormValidation } from "../../hooks/useFormValidation.js";
 import "./loginForm.css";
 
-export default function LoginForm({ onSuccess, defaultEmail = "" }) {
+export const LoginForm = ({ onSuccess, defaultEmail = "" }) => {
   const [form, setForm] = useState({ email: defaultEmail, password: "" });
   const { errors, validate } = useFormValidation({ type: "login" });
 
@@ -38,5 +38,4 @@ export default function LoginForm({ onSuccess, defaultEmail = "" }) {
       </form>
     </>
   );
-}
-
+};

@@ -1,12 +1,12 @@
 import React from "react";
-import { ListGroup, Row, Col, Image, Button } from "react-bootstrap";
+import { ListGroup, Row, Col, Image, Button, Container } from "react-bootstrap";
 import { formatCL } from "../../utils/formatCL";
 
-export const Cart = ({ items, onInc, onDec }) => {
+const Cart = ({ items, onInc, onDec }) => {
   const total = items.reduce((acc, it) => acc + it.price * it.count, 0);
 
   return (
-    <div>
+    <Container>
       <h6 className="mb-3">Detalles del pedido:</h6>
 
       <ListGroup className="mb-3">
@@ -50,6 +50,8 @@ export const Cart = ({ items, onInc, onDec }) => {
       <h5>
         Total: <strong>${formatCL(total)}</strong>
       </h5>
-    </div>
+    </Container>
   );
 };
+
+export default Cart;

@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# No requerido en el repo
+../simple-api-backend-nodejs-express-fs-json-jwt-main/

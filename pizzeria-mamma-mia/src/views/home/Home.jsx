@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
-import CardPizza from "../../components/cardpizza/CardPizza.jsx";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Header } from "../../components/header/Header.jsx";
+import { useEffect } from "react";
+import { CardPizza, Header } from "../../components/index.js";
 import "./home.css";
 
 const Home = ({ url }) => {

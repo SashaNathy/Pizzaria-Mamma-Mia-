@@ -1,18 +1,11 @@
 import { useState } from "react";
-import "./App.css";
-import { Footer } from "./components/footer/Footer.jsx";
-import Navb from "./components/navbar/Navb.jsx";
-import Home from "./views/home/Home.jsx";
-import RegisterForm from "./components/registerForm/RegisterForm.jsx";
-import LoginForm from "./components/loginForm/LoginForm.jsx";
+import { Routes, Route } from "react-router-dom";
+import { Cart, Home, NotFound, PizzaDetail, Profile } from "./views/index.js";
+import { Footer, LoginForm, Navb, RegisterForm } from "./components/index.js";
 import { pizzaCart } from "./utils/pizzas.js";
-import { Cart } from "./views/cart/Cart.jsx";
-import PizzaDetail from "./views/pizzaDetail/PizzaDetail.jsx";
+import "./App.css";
 
 export default function App() {
-  // const [screen, setScreen] = useState("register"); // register → login → home
-  // const [loggedIn, setLoggedIn] = useState(false);
-  // const [email, setEmail] = useState("");
   const [items, setItems] = useState(pizzaCart);
   const url = "http://localhost:5000/api/pizzas";
 
@@ -32,35 +25,32 @@ export default function App() {
 
   return (
     <>
-      {/* Navb solo recibe el estado */}
       <Navb />
-
       <div className="home-wrap">
-        {/* {screen === "register" && (
-          <RegisterForm
-            className="center"
-            onSuccess={(userEmail) => {
-              setEmail(userEmail);
-              setScreen("login");
-            }}
+        <Routes>
+          <Route path="/" element={<Home url={url} />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                email="usuario@correo.com"
+                onLogout={() => alert("Sesión cerrada")}
+              />
+            }
           />
-        )} */}
-        {/* {screen === "login" && (
-          <LoginForm
-            // className="center"
-            // // defaultEmail={email}
-            // // onSuccess={() => {
-            // //   setLoggedIn(true);
-            // //   setScreen("home");
-            // // }}
+          <Route
+            path="/cart"
+            element={<Cart items={items} onInc={handleInc} onDec={handleDec} />}
           />
-        )} */}
-        {/* {screen === "home" && <Home />} */}
-        {/* <Home url={url} /> */}
-        {/* <Cart items={items} onInc={handleInc} onDec={handleDec} /> */}
-        <PizzaDetail url={url} id="p001" />
+          <Route
+            path="/pizza/p001"
+            element={<PizzaDetail url={url} id="p001" />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
-
       <Footer />
     </>
   );

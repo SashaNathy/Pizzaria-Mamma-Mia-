@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFormValidation } from "../../hooks/useFormValidation.js";
 
-export default function RegisterForm({ onSuccess }) {
+export const RegisterForm = ({ onSuccess }) => {
   const [form, setForm] = useState({ email: "", password: "", confirm: "" });
   const { errors, validate } = useFormValidation({ type: "register" });
 
@@ -68,4 +68,4 @@ export default function RegisterForm({ onSuccess }) {
       </button>
     </form>
   );
-}
+};
