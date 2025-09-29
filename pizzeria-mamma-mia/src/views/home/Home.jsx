@@ -1,32 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useEffect } from "react";
 import { CardPizza, Header } from "../../components/index.js";
 import "./home.css";
+import { PizzaContext } from "../../context/PizzaContext.jsx";
 
-const Home = ({ url }) => {
-  const [pizzas, setPizzas] = useState([]);
+const Home = () => {
+  const { pizzas, loading, error } = useContext(PizzaContext);
 
-  const getPizzas = async () => {
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setPizzas(data);
-    } catch (error) {
-      console.error({
-        message: `Error al consultar la API`,
-        status: 500,
-        code: `INTERNAL SERVER ERROR`,
-        error,
-      });
-    }
-  };
+  if (loading) {
+    return (
+      <main className="home">
+        <Container className="py-5 text-center">
+          <p>Cargando pizzas...</p>
+        </Container>
+      </main>
+    );
+  }
 
-  useEffect(() => {
-    getPizzas();
-  }, []);
+  if (error) {
+    return (
+      <main className="home">
+        <Container className="py-5 text-center">
+          <p>Error al cargar las pizzas: {error}</p>
+        </Container>
+      </main>
+    );
+  }
 
   return (
     <main className="home">
@@ -38,6 +40,7 @@ const Home = ({ url }) => {
           {pizzas.map((pizza) => (
             <Col key={pizza.id} xs={12} sm={6} md={4} className="mb-4">
               <CardPizza
+                id={pizza.id}
                 name={pizza.name}
                 price={pizza.price}
                 ingredients={pizza.ingredients}

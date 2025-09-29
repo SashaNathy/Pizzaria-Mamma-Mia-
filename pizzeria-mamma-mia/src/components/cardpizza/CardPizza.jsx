@@ -4,8 +4,15 @@ import { formatCL } from "../../utils/formatCL";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
-export const CardPizza = ({ name, price, ingredients, desc, img }) => {
+export const CardPizza = ({ name, price, ingredients, desc, img, id }) => {
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    addToCart({ id, name, price, ingredients, desc, img });
+  };
   return (
     <Container>
       <Card style={{ width: "18rem" }}>
@@ -26,7 +33,9 @@ export const CardPizza = ({ name, price, ingredients, desc, img }) => {
           </Container>
           <section className="d-flex justify-content-around gap-4">
             <Button variant="light">Ver mas👀</Button>
-            <Button variant="dark">Añadir</Button>
+            <Button variant="dark" onClick={handleAddToCart}>
+              Añadir
+            </Button>
           </section>
         </Card.Body>
       </Card>

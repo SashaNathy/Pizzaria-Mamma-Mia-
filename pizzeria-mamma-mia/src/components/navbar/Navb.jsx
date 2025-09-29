@@ -1,12 +1,14 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { CartContext } from "../../context/CartContext.jsx";
 import { formatCL } from "../../utils/formatCL";
 import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
 
 export const Navb = () => {
-  const total = 25000;
-
+  const cart = useContext(CartContext);
+  const total = cart?.total ?? 0;
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-dark">
       <Container>

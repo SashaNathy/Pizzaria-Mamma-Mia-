@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ListGroup, Row, Col, Image, Button, Container } from "react-bootstrap";
 import { formatCL } from "../../utils/formatCL";
+import { CartContext } from "../../context/CartContext.jsx";
 
-const Cart = ({ items, onInc, onDec }) => {
-  const total = items.reduce((acc, it) => acc + it.price * it.count, 0);
+const Cart = () => {
+  const { items, inc, dec, total } = useContext(CartContext);
 
   return (
     <Container>
@@ -29,7 +30,7 @@ const Cart = ({ items, onInc, onDec }) => {
                 <Button
                   variant="outline-danger"
                   size="sm"
-                  onClick={() => onDec(it.id)}
+                  onClick={() => dec(it.id)}
                 >
                   −
                 </Button>
@@ -37,7 +38,7 @@ const Cart = ({ items, onInc, onDec }) => {
                 <Button
                   variant="outline-primary"
                   size="sm"
-                  onClick={() => onInc(it.id)}
+                  onClick={() => inc(it.id)}
                 >
                   +
                 </Button>
