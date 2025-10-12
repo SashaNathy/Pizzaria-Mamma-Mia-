@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { ListGroup, Row, Col, Image, Button, Container } from "react-bootstrap";
 import { formatCL } from "../../utils/formatCL";
 import { CartContext } from "../../context/CartContext.jsx";
+import { UserContext } from "../../context/UserContext.jsx";
 
 const Cart = () => {
   const { items, inc, dec, total } = useContext(CartContext);
+  const { token } = useContext(UserContext);
 
   return (
     <Container>
@@ -50,6 +52,8 @@ const Cart = () => {
 
       <h5>
         Total: <strong>${formatCL(total)}</strong>
+        <br />
+        {token ? <Button>Pagar</Button> : null}
       </h5>
     </Container>
   );

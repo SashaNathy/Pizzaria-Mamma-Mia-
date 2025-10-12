@@ -5,8 +5,10 @@ import { CartContext } from "../../context/CartContext.jsx";
 import { formatCL } from "../../utils/formatCL";
 import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
+import { UserContext } from "../../context/UserContext.jsx";
 
 export const Navb = () => {
+  const { token, logout } = useContext(UserContext);
   const cart = useContext(CartContext);
   const total = cart?.total ?? 0;
   return (
@@ -23,15 +25,23 @@ export const Navb = () => {
             <Nav.Link as={NavLink} to="/" end>
               🍕Home
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/profile">
-              📄Profile
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/login">
-              🔓Login
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/register">
-              📄Register
-            </Nav.Link>
+            {token ? (
+              <>
+                <Nav.Link as={NavLink} to="/profile">
+                  📄Profile
+                </Nav.Link>
+                <Nav.Link onClick={logout}>🔐Logout</Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link as={NavLink} to="/login">
+                  🔓Login
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/register">
+                  📄Register
+                </Nav.Link>
+              </>
+            )}
           </Nav>
 
           <Nav>

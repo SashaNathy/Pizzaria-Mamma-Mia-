@@ -6,9 +6,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export const CardPizza = ({ name, price, ingredients, desc, img, id }) => {
   const { addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
     addToCart({ id, name, price, ingredients, desc, img });
@@ -32,7 +34,9 @@ export const CardPizza = ({ name, price, ingredients, desc, img, id }) => {
             </ul>
           </Container>
           <section className="d-flex justify-content-around gap-4">
-            <Button variant="light">Ver mas👀</Button>
+            <Button variant="light" onClick={() => navigate(`/pizza/${id}`)}>
+              Ver mas👀
+            </Button>
             <Button variant="dark" onClick={handleAddToCart}>
               Añadir
             </Button>
