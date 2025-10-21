@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useFormValidation } from "../../hooks/useFormValidation.js";
+import { UserContext } from "../../context/UserContext.jsx";
 
 export const RegisterForm = ({ onSuccess }) => {
   const [form, setForm] = useState({ email: "", password: "", confirm: "" });
   const { errors, validate } = useFormValidation({ type: "register" });
+  const { register, loading, error } = useContext(UserContext);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (validate(form)) {
-      onSuccess?.(form.email);
+    if (!validate(form)) return;
+    try {
+      await register({ email: form.email, password: form.password });
+      onSuccess?.(form.email); // si luego autocompletas el login con este mail
+    } catch (_) {
+      // el mensaje ya está en `error`
     }
   };
 
@@ -63,8 +69,10 @@ export const RegisterForm = ({ onSuccess }) => {
         <small style={{ color: "crimson" }}>{errors.confirm}</small>
       )}
 
-      <button type="submit" style={{ marginTop: 8 }}>
-        Crear cuenta
+      {error && <p style={{ color: "crimson", marginTop: 4 }}>{error}</p>}
+
+      <button type="submit" style={{ marginTop: 8 }} disabled={loading}>
+        {loading ? "Creando..." : "Crear cuenta"}
       </button>
     </form>
   );
